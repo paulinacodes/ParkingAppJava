@@ -85,4 +85,6 @@ public class ParkingApp {
         bazaDanych.add(nowaTablica);
         System.out.println("Dodane nową tablice: " + nowaTablica);
     }
+    public static void usunPojazd(){
+    }
 }
