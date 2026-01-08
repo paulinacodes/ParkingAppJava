@@ -10,6 +10,7 @@ public class ParkingApp {
     static int opcja = 0;
     static boolean pracuj = true;
     static Scanner mySc = new Scanner(System.in);
+    static int maxOpcja = 5;
 
     public static void main (String[] args) {
         System.out.println ("=============== WITAJ W PARKINGAPP ==============") ;
@@ -19,7 +20,8 @@ public class ParkingApp {
             System.out.println ("1.Wyświetl listę pojazdów") ;
             System.out.println ("2.Dodaj pojazd");
             System.out.println ("3.Usuń pojazd") ;
-            System.out.println ("4.Zakończ") ;
+            System.out.println ("4.Sprawdź uprawnienie pojazdu") ;
+            System.out.println ("5.Zakończ") ;
             opcja = wybierzOpcje();
 
             switch(opcja) {
@@ -41,6 +43,10 @@ public class ParkingApp {
                     poczekajNaEnter();
                     break;
                 case 4:
+                    sprawdzUprawnieniePojazdu();
+                    poczekajNaEnter();
+                    break;
+                case 5:
                     System.out.println("Wybrana opcja to: " + opcja);
                     System.out.println("KONIEC DZIALANIA PROGRAMU");
                     pracuj = false;
@@ -59,15 +65,15 @@ public class ParkingApp {
                 mySc.nextLine(); // czyści ENTER po liczbie
 
                 //Sprawdzenie czy wybrany numer jest w zakresie dostepnych opcji
-                if(temp >= 1 && temp <= 4){
+                if(temp >= 1 && temp <= maxOpcja){
                     return temp;
                 }
                 else{
-                    System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do 4");
+                    System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do " + maxOpcja);
                 }
             }
             else{
-                System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do 4");
+                System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do " + maxOpcja);
                 mySc.nextLine();
             }
         }
@@ -87,7 +93,7 @@ public class ParkingApp {
     }
     public static void dodajPojazd(){
         System.out.println("Wprowadź tablice rejestracyjną i wciśnij ENTER");
-        String nowaTablica = mySc.nextLine();
+        String nowaTablica = mySc.nextLine().trim().toUpperCase();
         bazaDanych.add(nowaTablica);
         System.out.println("Dodane nową tablice: " + nowaTablica);
     }
@@ -120,9 +126,28 @@ public class ParkingApp {
         String usunieta = bazaDanych.remove(id - 1);
         System.out.println("Usunięto pojazd o ID " + id + ": " + usunieta);
     }
+    public static void sprawdzUprawnieniePojazdu() {
+        String tablica;
+
+        while (true) {
+            System.out.println("Podaj tablicę do sprawdzenia i wciśnij ENTER:");
+            tablica = mySc.nextLine().trim().toUpperCase();
+
+            if (!tablica.isEmpty()) {
+                break;
+            }
+
+            System.out.println("Nie podano tablicy (pusty tekst). Spróbuj ponownie.");
+        }
+
+        if (bazaDanych.contains(tablica)) {
+            System.out.println("Pojazd jest uprawniony (znaleziony w bazie).");
+        } else {
+            System.out.println("Pojazd nie jest uprawniony (brak w bazie).");
+        }
+    }
     public static void poczekajNaEnter() {
         System.out.println("Naciśnij ENTER, aby wrócić do menu...");
         mySc.nextLine();
     }
-
 }
