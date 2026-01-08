@@ -114,8 +114,14 @@ public class ParkingApp {
             }
             System.out.println("Nie podano tablicy (pusty tekst). Spróbuj ponownie.");
         }
+
+        if (bazaDanych.contains(nowaTablica)) {
+            System.out.println("Taka tablica już istnieje w bazie: " + nowaTablica);
+            return;
+        }
+
         bazaDanych.add(nowaTablica);
-        System.out.println("Dodane nową tablice: " + nowaTablica);
+        System.out.println("Dodano nową tablicę: " + nowaTablica);
     }
     public static void usunPojazd() {
         if (bazaDanych.isEmpty()) {
@@ -192,7 +198,7 @@ public class ParkingApp {
         System.out.println("Pojemność parkingu: " + pojemnosc);
         System.out.println("Liczba aut: " + liczbaPojazdow);
         System.out.println("Wolne miejsca: " + wolneMiejsca);
-        System.out.printf("Zajęte miejsca: %.1f %%\n", procentZajete);
+        System.out.printf("Zajęte miejsca: %.1f%%\n", procentZajete);
     }
 
 }
