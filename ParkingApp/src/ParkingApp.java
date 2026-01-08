@@ -11,6 +11,8 @@ public class ParkingApp {
     static boolean pracuj = true;
     static Scanner mySc = new Scanner(System.in);
     static int maxOpcja = 5;
+    static int maxPojazdow = 5;
+
 
     public static void main (String[] args) {
         System.out.println ("=============== WITAJ W PARKINGAPP ==============") ;
@@ -92,6 +94,11 @@ public class ParkingApp {
         }
     }
     public static void dodajPojazd(){
+        if (bazaDanych.size() >= maxPojazdow) {
+            System.out.println("Baza danych jest pełna. Maksymalna liczba pojazdów to: " + maxPojazdow);
+            return;
+        }
+
         String nowaTablica;
         while (true) {
             System.out.println("Wprowadź tablice rejestracyjną i wciśnij ENTER");
