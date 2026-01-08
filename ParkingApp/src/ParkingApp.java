@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ParkingApp {
@@ -27,43 +26,50 @@ public class ParkingApp {
                 case 1:
                   //  System.out.println("Wybrana opcja to: " + opcja);
                     wyswietlPojazdy();
-                    mySc.nextLine();
+                    poczekajNaEnter();
                     break;
                 case 2:
                     // System.out.println("Wybrana opcja to: " + opcja);
                     //System.out.println("Dodawanie pojazdu");
                     dodajPojazd();
-                    mySc.nextLine();
+                    poczekajNaEnter();
                     break;
                 case 3:
                     System.out.println("Wybrana opcja to: " + opcja);
                     System.out.println("Usuwanie pojazdu.");
-                    mySc.nextLine();
+                    poczekajNaEnter();
                     break;
                 case 4:
                     System.out.println("Wybrana opcja to: " + opcja);
                     System.out.println("KONIEC DZIALANIA PROGRAMU");
                     pracuj = false;
+                    break;
                 default:
                     System.out.println("Opcja poza zakresem");
             }
-        };
+        }
     }
 
     public static int wybierzOpcje(){
-        Scanner sc = new Scanner(System.in);
-        int temp = 0;
+        int temp;
         while(true){
-            if (sc.hasNextInt()){
-                temp = sc.nextInt();
-                break;
+            if (mySc.hasNextInt()){
+                temp = mySc.nextInt();
+                mySc.nextLine(); // czyści ENTER po liczbie
+
+                //Sprawdzenie czy wybrany numer jest w zakresie dostepnych opcji
+                if(temp >= 1 && temp <= 4){
+                    return temp;
+                }
+                else{
+                    System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do 4");
+                }
             }
             else{
                 System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do 4");
-                sc.next();
+                mySc.nextLine();
             }
-        };
-        return temp;
+        }
     }
     public static void wyswietlPojazdy(){
 
@@ -79,12 +85,16 @@ public class ParkingApp {
         }
     }
     public static void dodajPojazd(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("Wprowadź tablice rejestracyjną i wciśnij ENTER");
-        String nowaTablica = sc.nextLine();
+        String nowaTablica = mySc.nextLine();
         bazaDanych.add(nowaTablica);
         System.out.println("Dodane nową tablice: " + nowaTablica);
     }
     public static void usunPojazd(){
     }
+    public static void poczekajNaEnter() {
+        System.out.println("Naciśnij ENTER, aby wrócić do menu...");
+        mySc.nextLine();
+    }
+
 }
