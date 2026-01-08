@@ -76,6 +76,7 @@ public class ParkingApp {
             }
             else{
                 System.out.println("Podana opcja nie istnieje. Podaj liczbę całkowitą od 1 do " + maxOpcja);
+                mySc.next();
                 mySc.nextLine();
             }
         }
@@ -133,7 +134,8 @@ public class ParkingApp {
                 }
             } else {
                 System.out.println("Podaj ID od 1 do " + bazaDanych.size());
-                mySc.nextLine(); // wyrzuć błędną linię
+                mySc.next();
+                mySc.nextLine();
             }
         }
 
