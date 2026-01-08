@@ -35,8 +35,9 @@ public class ParkingApp {
                     poczekajNaEnter();
                     break;
                 case 3:
-                    System.out.println("Wybrana opcja to: " + opcja);
-                    System.out.println("Usuwanie pojazdu.");
+                    //System.out.println("Wybrana opcja to: " + opcja);
+                    //System.out.println("Usuwanie pojazdu.");
+                    usunPojazd();
                     poczekajNaEnter();
                     break;
                 case 4:
@@ -90,7 +91,34 @@ public class ParkingApp {
         bazaDanych.add(nowaTablica);
         System.out.println("Dodane nową tablice: " + nowaTablica);
     }
-    public static void usunPojazd(){
+    public static void usunPojazd() {
+        if (bazaDanych.isEmpty()) {
+            System.out.println("Baza danych jest pusta. Nie ma czego usuwać.");
+            return;
+        }
+
+        wyswietlPojazdy();
+        System.out.println("Podaj ID pojazdu do usunięcia i wciśnij ENTER:");
+
+        int id;
+        while (true) {
+            if (mySc.hasNextInt()) {
+                id = mySc.nextInt();
+                mySc.nextLine(); // czyści ENTER
+
+                if (id >= 1 && id <= bazaDanych.size()) {
+                    break;
+                } else {
+                    System.out.println("ID poza zakresem. Podaj ID od 1 do " + bazaDanych.size());
+                }
+            } else {
+                System.out.println("Podaj ID od 1 do " + bazaDanych.size());
+                mySc.nextLine(); // wyrzuć błędną linię
+            }
+        }
+
+        String usunieta = bazaDanych.remove(id - 1);
+        System.out.println("Usunięto pojazd o ID " + id + ": " + usunieta);
     }
     public static void poczekajNaEnter() {
         System.out.println("Naciśnij ENTER, aby wrócić do menu...");
