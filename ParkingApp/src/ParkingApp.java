@@ -92,8 +92,15 @@ public class ParkingApp {
         }
     }
     public static void dodajPojazd(){
-        System.out.println("Wprowadź tablice rejestracyjną i wciśnij ENTER");
-        String nowaTablica = mySc.nextLine().trim().toUpperCase();
+        String nowaTablica;
+        while (true) {
+            System.out.println("Wprowadź tablice rejestracyjną i wciśnij ENTER");
+            nowaTablica = mySc.nextLine().trim().toUpperCase();
+            if (!nowaTablica.isEmpty()) {
+                break;
+            }
+            System.out.println("Nie podano tablicy (pusty tekst). Spróbuj ponownie.");
+        }
         bazaDanych.add(nowaTablica);
         System.out.println("Dodane nową tablice: " + nowaTablica);
     }
