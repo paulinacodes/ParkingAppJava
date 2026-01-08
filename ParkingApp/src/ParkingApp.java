@@ -10,8 +10,8 @@ public class ParkingApp {
     static int opcja = 0;
     static boolean pracuj = true;
     static Scanner mySc = new Scanner(System.in);
-    static int maxOpcja = 5;
-    static int maxPojazdow = 5;
+    static int maxOpcja = 6;
+    static int maxPojazdow = 8;
 
 
     public static void main (String[] args) {
@@ -23,7 +23,8 @@ public class ParkingApp {
             System.out.println ("2.Dodaj pojazd");
             System.out.println ("3.Usuń pojazd") ;
             System.out.println ("4.Sprawdź uprawnienie pojazdu") ;
-            System.out.println ("5.Zakończ") ;
+            System.out.println ("5.Statystyki parkingu") ;
+            System.out.println ("6.Zakończ") ;
             opcja = wybierzOpcje();
 
             switch(opcja) {
@@ -49,6 +50,10 @@ public class ParkingApp {
                     poczekajNaEnter();
                     break;
                 case 5:
+                    wyswietlStatystyki();
+                    poczekajNaEnter();
+                    break;
+                case 6:
                     System.out.println("Wybrana opcja to: " + opcja);
                     System.out.println("KONIEC DZIALANIA PROGRAMU");
                     pracuj = false;
@@ -166,4 +171,28 @@ public class ParkingApp {
         System.out.println("Naciśnij ENTER, aby wrócić do menu...");
         mySc.nextLine();
     }
+    public static void wyswietlStatystyki() {
+        int pojemnosc = maxPojazdow;
+        int liczbaPojazdow = bazaDanych.size();
+
+        int wolneMiejsca = pojemnosc - liczbaPojazdow;
+        if (wolneMiejsca < 0) {
+            wolneMiejsca = 0;
+        }
+
+        double procentZajete = 0.0;
+        if (pojemnosc > 0) {
+            procentZajete = (liczbaPojazdow * 100.0) / pojemnosc;
+            if (procentZajete > 100.0) {
+                procentZajete = 100.0;
+            }
+        }
+
+        System.out.println("Statystyki parkingu:");
+        System.out.println("Pojemność parkingu: " + pojemnosc);
+        System.out.println("Liczba aut: " + liczbaPojazdow);
+        System.out.println("Wolne miejsca: " + wolneMiejsca);
+        System.out.printf("Zajęte miejsca: %.1f %%\n", procentZajete);
+    }
+
 }
