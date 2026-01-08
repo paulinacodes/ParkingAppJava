@@ -29,19 +29,14 @@ public class ParkingApp {
 
             switch(opcja) {
                 case 1:
-                  //  System.out.println("Wybrana opcja to: " + opcja);
                     wyswietlPojazdy();
                     poczekajNaEnter();
                     break;
                 case 2:
-                    // System.out.println("Wybrana opcja to: " + opcja);
-                    //System.out.println("Dodawanie pojazdu");
                     dodajPojazd();
                     poczekajNaEnter();
                     break;
                 case 3:
-                    //System.out.println("Wybrana opcja to: " + opcja);
-                    //System.out.println("Usuwanie pojazdu.");
                     usunPojazd();
                     poczekajNaEnter();
                     break;
